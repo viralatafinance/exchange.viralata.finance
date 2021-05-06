@@ -1,6 +1,6 @@
 {
-  "name": "@pancakeswap/interface",
-  "description": "Pancakeswap Interface",
+  "name": "exchange-viralata-finance",
+  "description": "Viralata Finance Exchange",
   "homepage": ".",
   "private": true,
   "dependencies": {

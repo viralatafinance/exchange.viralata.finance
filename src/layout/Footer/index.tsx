@@ -63,7 +63,7 @@ const Footer: React.FC = () => {
         <Grid.Container gap={2} justify="center">
           <Grid xs={12} sm={8} style={{ marginBottom: 20 }}>
             <div>
-              <Text h3>CYBERICO</Text>
+              <Text h3>Viralata Finance</Text>
               <StyledLink href="#">Home</StyledLink>
               <Spacer y={0.5} />
               <StyledLink href="#">Trade</StyledLink>
@@ -76,9 +76,7 @@ const Footer: React.FC = () => {
           <Grid xs={12} sm={8} style={{ marginBottom: 20 }}>
             <div>
               <Text h3>CONTRACTS</Text>
-              <StyledLink href="#">CYCO Token</StyledLink>
-              <Spacer y={0.5} />
-              <StyledLink href="#">Cyberico Contract</StyledLink>
+              <StyledLink href="#">REAU Token</StyledLink>
             </div>
           </Grid>
           <Grid xs={24} sm={8} style={{ marginBottom: 20 }}>
@@ -98,7 +96,7 @@ const Footer: React.FC = () => {
       <StyledContentBottom>
         <Grid.Container gap={2} justify={isDesktop ? "flex-start" : "center"}>
           <Grid xs={!isDesktop && 24}>
-            © Cyberico, Inc. All rights reserved.
+            © Viralata Finance. All rights reserved.
           </Grid>
           <Grid>
             <StyledLink href="#">Terms</StyledLink>
