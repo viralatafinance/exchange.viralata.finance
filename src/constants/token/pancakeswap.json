@@ -40,6 +40,14 @@
       "chainId": 56,
       "decimals": 18,
       "logoURI": "/images/coins/BUSD.png"
+    },
+    {
+      "name": "Viralata Finance",
+      "symbol": "REAU",
+      "address": "0x4c79b8c9cB0BD62B047880603a9DEcf36dE28344",
+      "chainId": 56,
+      "decimals": 9,
+      "logoURI": "/images/coins/REAU.png"
     }
   ]
 }

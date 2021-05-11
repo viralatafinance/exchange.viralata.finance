@@ -70,11 +70,13 @@ const Swap = () => {
 
   // get custom setting values for user
   const [deadline] = useUserDeadline()
-  const [allowedSlippage] = useUserSlippageTolerance()
 
   // swap state
   const { independentField, typedValue, recipient } = useSwapState()
   const { v2Trade, currencyBalances, parsedAmount, currencies, inputError: swapInputError } = useDerivedSwapInfo()
+  const [allowedSlippage, setUserSlippageTolerance] = useUserSlippageTolerance(currencies)
+  const [oldSlippage, setOldSlippage] = useState(allowedSlippage)
+
   const { wrapType, execute: onWrap, inputError: wrapInputError } = useWrapCallback(currencies[Field.INPUT], currencies[Field.OUTPUT], typedValue)
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
   const trade = showWrap ? undefined : v2Trade
@@ -206,10 +208,17 @@ const Swap = () => {
 
   const handleInputSelect = useCallback(
     (inputCurrency) => {
+      if (inputCurrency.address === '0x4c79b8c9cB0BD62B047880603a9DEcf36dE28344') {
+        setOldSlippage(allowedSlippage)
+        setUserSlippageTolerance(800)
+      } else {
+        setUserSlippageTolerance(oldSlippage)
+      }
+
       setApprovalSubmitted(false)
       onCurrencySelection(Field.INPUT, inputCurrency)
     },
-    [onCurrencySelection, setApprovalSubmitted]
+    [onCurrencySelection, setApprovalSubmitted, setUserSlippageTolerance, setOldSlippage, allowedSlippage, oldSlippage]
   )
 
   const handleMaxInput = useCallback(() => {
@@ -220,14 +229,24 @@ const Swap = () => {
 
   const handleOutputSelect = useCallback(
     (outputCurrency) => {
+      if (outputCurrency.address === '0x4c79b8c9cB0BD62B047880603a9DEcf36dE28344') {
+        setOldSlippage(allowedSlippage)
+        setUserSlippageTolerance(800)
+      } else {
+        setUserSlippageTolerance(oldSlippage)
+      }
       onCurrencySelection(Field.OUTPUT, outputCurrency)
     },
-    [onCurrencySelection]
+    [onCurrencySelection, setUserSlippageTolerance, setOldSlippage, allowedSlippage, oldSlippage]
   )
 
   return (
     <>
-      <TokenWarningModal isOpen={urlLoadedTokens.length > 0 && !dismissTokenWarning} tokens={urlLoadedTokens} onConfirm={handleConfirmTokenWarning} />
+      <TokenWarningModal
+        isOpen={urlLoadedTokens.filter((c) => c.address !== '0x4c79b8c9cB0BD62B047880603a9DEcf36dE28344').length > 0 && !dismissTokenWarning}
+        tokens={urlLoadedTokens}
+        onConfirm={handleConfirmTokenWarning}
+      />
       <AppBody>
         <Wrapper id="swap-page">
           <ConfirmSwapModal

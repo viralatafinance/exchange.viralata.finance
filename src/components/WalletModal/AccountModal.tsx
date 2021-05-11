@@ -1,22 +1,21 @@
 import React from 'react'
-import { Button, Text, LinkExternal, Flex, Modal, connectorLocalStorageKey } from '@pancakeswap-libs/uikit'
+import { Button, Flex, connectorLocalStorageKey } from '@pancakeswap-libs/uikit'
+import { Modal, Text, Link } from '@geist-ui/react'
 import CopyToClipboard from './CopyToClipboard'
 
 interface Props {
+  isOpen: boolean
   account: string
   logout: () => void
   onDismiss?: () => void
 }
 
-const AccountModal: React.FC<Props> = ({ account, logout, onDismiss = () => null }) => (
-  <Modal title="Your wallet" onDismiss={onDismiss}>
-    <Text fontSize="20px" bold style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginBottom: '8px' }}>
-      {account}
-    </Text>
-    <Flex mb="32px">
-      <LinkExternal small href={`https://bscscan.com/address/${account}`} mr="16px">
-        View on BscScan
-      </LinkExternal>
+const AccountModal: React.FC<Props> = ({ isOpen, account, logout, onDismiss = () => null }) => (
+  <Modal open={isOpen} onClose={onDismiss}>
+    <Modal.Title>Your wallet</Modal.Title>
+    <Text style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', marginBottom: '8px' }}>{account}</Text>
+    <Flex mb="32px" justifyContent="space-around">
+      <Link href={`https://bscscan.com/address/${account}`}>View on BscScan</Link>
       <CopyToClipboard toCopy={account}>Copy Address</CopyToClipboard>
     </Flex>
     <Flex justifyContent="center">

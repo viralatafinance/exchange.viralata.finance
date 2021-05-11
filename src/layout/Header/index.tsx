@@ -1,5 +1,8 @@
 import { Grid, Page, Tag, useMediaQuery, useModal } from '@geist-ui/react'
-import { ConnectorNames, useWalletModal } from '@pancakeswap-libs/uikit'
+import { ConnectorNames } from '@pancakeswap-libs/uikit'
+import { useWalletModal } from 'components/WalletModal'
+import ConnectModal from 'components/WalletModal/ConnectModal'
+import AccountModal from 'components/WalletModal/AccountModal'
 import { useWeb3React } from '@web3-react/core'
 import { connectorsByName } from 'connectors'
 import React from 'react'
@@ -49,7 +52,9 @@ const StyledConnect = styled(Tag)`
 `
 
 const Header: React.FC = () => {
-  const { setVisible, bindings } = useModal()
+  const connectModal = useModal(false)
+  const accountModal = useModal(false)
+
   const isDesktop = useMediaQuery('md', { match: 'up' })
 
   const { account, activate, deactivate } = useWeb3React()
@@ -61,17 +66,25 @@ const Header: React.FC = () => {
     }
   }
 
-  const { onPresentConnectModal, onPresentAccountModal } = useWalletModal(handleLogin, deactivate, account as string)
-
   return (
     <StyledPageHeader>
+      <ConnectModal isOpen={connectModal.visible} onDismiss={() => connectModal.setVisible(false)} login={handleLogin} />
+      <AccountModal isOpen={accountModal.visible} onDismiss={() => accountModal.setVisible(false)} account={account || ''} logout={deactivate} />
       <Grid.Container justify="center">
         <Logo href="https://viralata.finance">
           <LogoImage src={isDesktop ? '/images/logo-white.png' : '/images/logo.png'} alt="Vira-lata Finance" />
         </Logo>
         <Grid xs alignItems="center" justify="flex-end" />
         <FlexDiv>
-          <StyledConnect onClick={account ? onPresentAccountModal : onPresentConnectModal}>
+          <StyledConnect
+            onClick={() => {
+              if (account) {
+                accountModal.setVisible(true)
+              } else {
+                connectModal.setVisible(true)
+              }
+            }}
+          >
             {account ? `${account.substr(0, 4)}...${account.substr(-4)}` : `Connect Wallet`}
           </StyledConnect>
         </FlexDiv>

@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link, HelpIcon, Modal } from '@pancakeswap-libs/uikit'
+import { HelpIcon } from '@pancakeswap-libs/uikit'
+import { Modal, Link } from '@geist-ui/react'
 import WalletCard from './WalletCard'
 import config from './config'
 import { Login } from './types'
 
 interface Props {
+  isOpen: boolean
   login: Login
   onDismiss?: () => void
 }
@@ -17,12 +19,13 @@ const HelpLink = styled(Link)`
   margin-top: 24px;
 `
 
-const ConnectModal: React.FC<Props> = ({ login, onDismiss = () => null }) => (
-  <Modal title="Connect to a wallet" onDismiss={onDismiss}>
+const ConnectModal: React.FC<Props> = ({ isOpen, login, onDismiss = () => null }) => (
+  <Modal open={isOpen} onClose={onDismiss}>
+    <Modal.Title>Connect to a wallet</Modal.Title>
     {config.map((entry, index) => (
       <WalletCard key={entry.title} login={login} walletConfig={entry} onDismiss={onDismiss} mb={index < config.length - 1 ? '8px' : '0'} />
     ))}
-    <HelpLink href="https://docs.pancakeswap.finance/guides/faq#how-do-i-set-up-my-wallet-on-binance-smart-chain" external>
+    <HelpLink href="https://docs.pancakeswap.finance/guides/faq#how-do-i-set-up-my-wallet-on-binance-smart-chain">
       <HelpIcon color="primary" mr="6px" />
       Learn how to connect
     </HelpLink>

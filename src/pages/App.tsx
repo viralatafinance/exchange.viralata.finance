@@ -72,6 +72,7 @@ export default function App() {
 
   useEffect(() => {
     const storedLangCode = localStorage.getItem('pancakeSwapLanguage')
+    console.log('storedLangCode', storedLangCode)
     if (storedLangCode) {
       const storedLang = getStoredLang(storedLangCode)
       setSelectedLanguage(storedLang)

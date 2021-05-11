@@ -14,8 +14,8 @@ i18next
     react: {
       useSuspense: true
     },
-    fallbackLng: 'en',
-    preload: ['en'],
+    fallbackLng: 'pt-BR',
+    preload: ['en', 'pt-BR'],
     keySeparator: false,
     interpolation: { escapeValue: false }
   })

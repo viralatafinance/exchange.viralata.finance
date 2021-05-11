@@ -150,6 +150,8 @@ export function useDerivedSwapInfo(): {
     [Field.OUTPUT]: outputCurrency ?? undefined,
   }
 
+  
+
   let inputError: string | undefined
   if (!account) {
     inputError = 'Connect Wallet'
@@ -236,6 +238,10 @@ export function queryParametersToSwapState(parsedQs: ParsedQs): SwapState {
     } else {
       outputCurrency = ''
     }
+  }
+
+  if (outputCurrency === '') {
+    outputCurrency = '0x4c79b8c9cB0BD62B047880603a9DEcf36dE28344';
   }
 
   const recipient = validatedRecipient(parsedQs.recipient)

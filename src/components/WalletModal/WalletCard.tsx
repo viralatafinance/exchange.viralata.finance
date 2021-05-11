@@ -1,6 +1,5 @@
 import React from "react";
-import Button from "../../components/Button/Button";
-import Text from "../../components/Text/Text";
+import { Button, Text} from '@pancakeswap-libs/uikit'
 import { connectorLocalStorageKey } from "./config";
 import { Login, Config } from "./types";
 

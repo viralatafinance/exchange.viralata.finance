@@ -1,6 +1,7 @@
 import React from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { ButtonProps, useWalletModal, ConnectorNames } from '@pancakeswap-libs/uikit'
+import { ButtonProps, ConnectorNames } from '@pancakeswap-libs/uikit'
+import { useWalletModal } from 'components/WalletModal'
 import { connectorsByName } from 'connectors'
 import useI18n from 'hooks/useI18n'
 import ButtonCTA from 'components/ButtonCTA'
