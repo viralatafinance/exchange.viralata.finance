@@ -86,6 +86,17 @@ const StyledTextHover = styled(Text)`
   }
 `
 
+const StyledMaxButton = styled(Text)`
+  margin: 0 0.25rem !important;
+  display: inline !important;
+  cursor: pointer !important;
+  font-weight: 500 !important;
+
+  :hover {
+    color: #4bf2cd !important;
+  }
+`;
+
 interface CurrencyInputPanelProps {
   value: string
   onUserInput: (value: string) => void
@@ -151,6 +162,11 @@ export default function CurrencyInputPanel({
                   onUserInput(val)
                 }}
               />
+              {account && currency && showMaxButton && label !== 'To' && (
+                <StyledMaxButton onClick={onMax}>
+                  MAX
+                </StyledMaxButton>
+              )}
             </>
           )}
           <CurrencySelect
