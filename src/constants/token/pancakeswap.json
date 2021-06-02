@@ -48,14 +48,6 @@
       "chainId": 56,
       "decimals": 9,
       "logoURI": "/images/coins/REAU.png"
-    },
-    {
-      "name": "CryptoBRL",
-      "symbol": "CBRL",
-      "address": "0x9e691fd624410d631c082202b050694233031cb7",
-      "chainId": 56,
-      "decimals": 6,
-      "logoURI": "/images/coins/CBRL.png"
-    }
+    }   
   ]
 }
